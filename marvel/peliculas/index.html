@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="../img/marvel_logo.ico" type="image/ico" />
+    <link rel="stylesheet" href="../css/styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+      crossorigin="anonymous"
+    />
+    <title>Peliculas de Marvel</title>
+  </head>
+  <body>
+    <div class="container">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="../index.html">
+            <img
+              src="../img/Marvel_Logo.svg.png"
+              alt="logo"
+              width="100"
+              height="50"
+              class="img-fluid"
+            />
+          </a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="../index.html"
+                  >Inicio</a
+                >
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" href="index.html">Peliculas</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="../series/index.html">Series</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="../spider-man/index.html"
+                  >Spider-Man</a
+                >
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="../animacion/index.html">Animacion</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="../comics/index.html">Comics</a>
+              </li>
+            </ul>
+          </div>
+          <div class="search-container">
+            <input
+              type="text"
+              id="search-input"
+              placeholder="Buscar películas..."
+              class="form-control"
+            />
+          </div>
+        </div>
+      </nav>
+    </div>
+    <div
+      id="movie-container"
+      style="
+        padding-left: 80px;
+        padding-right: 80px;
+        padding-bottom: 20px;
+        padding-top: 20px;
+        margin-top: 75px;
+      "
+    ></div>
+    <div id="error-container" class="hidden">
+      <img src="../img/404-page-not-found-0.svg" alt="svg" />
+    </div>
+    <script>
+      const ucmMovies = [
+        {
+          title: "Iron Man",
+          image:
+            "https://www.themoviedb.org/t/p/w220_and_h330_face/veJTO75R5aapilhmlcFuqoGCPe3.jpg",
+          link: "https://pelisflix.news/pelicula/iron-man-kzpv/",
+        },
+        {
+          title: "The Incredible Hulk",
+          image:
+            "https://www.themoviedb.org/t/p/w220_and_h330_face/v9sw0fd2tB03EuuGYM3h8EpK1ex.jpg",
+          link: "https://pelispop.lat/pelicula/el-increible-hulk/",
+        },
+        {
+          title: "Iron Man 2",
+          image:
+            "https://www.themoviedb.org/t/p/w220_and_h330_face/ayyJVOV5I4MGjti7nIHC3mVCagR.jpg",
+          link: "https://pelispop.lat/pelicula/iron-man-2-123/",
+        },
+        {
+          title: "Thor",
+          image:
+            "https://www.themoviedb.org/t/p/w220_and_h330_face/lNUKpumgNebypmCfgSwTYTVPcKQ.jpg",
+          link: "https://pelispop.lat/pelicula/thor/",
+        },
+        {
+          title: "Capitán América el Primer Vengador",
+          image:
+            "https://www.themoviedb.org/t/p/w220_and_h330_face/82ucHZ4ioVGiweT1XMl1mUZaodq.jpg",
+          link: "https://pelisflix.autos/pelicula/capitan-america-el-primer-vengador-kaqt/",
+        },
+        {
+          title: "Avengers",
+          image:
+            "https://www.themoviedb.org/t/p/w220_and_h330_face/cWNIua1iPA4kGyQxJGvnx7UIzoT.jpg",
+          link: "https://pelispop.lat/pelicula/los-vengadores/",
+        },
+        {
+          title: "Iron Man 3",
+          image:
+            "https://www.themoviedb.org/t/p/w220_and_h330_face/qhPtAc1TKbMPqNvcdXSOn9Bn7hZ.jpg",
+          link: "https://pelispop.lat/pelicula/iron-man-3/",
+        },
+        {
+          title: "Thor: The Dark World",
+          image:
+            "https://www.themoviedb.org/t/p/w220_and_h330_face/wp6OxE4poJ4G7c0U2ZIXasTSMR7.jpg",
+          link: "https://pelispop.lat/pelicula/thor-un-mundo-oscuro/",
+        },
+        {
+          title: "Capitán América: The Winter Soldier",
+          image:
+            "https://www.themoviedb.org/t/p/w220_and_h330_face/qHLUgdODAOXyHpEWeFkv0WysCAQ.jpg",
+          link: "https://pelispop.lat/pelicula/capitan-america-y-el-soldado-del-invierno/",
+        },
+        {
+          title: "Guardians of the Galaxy",
+          image:
+            "https://www.themoviedb.org/t/p/w220_and_h330_face/pGIQJNsVQJvlwaGP3waADlu6Y5l.jpg",
+          link: "https://pelispop.lat/pelicula/guardianes-de-la-galaxia/",
+        },
+        {
+          title: "Avengers: Age of Ultron",
+          image:
+            "https://www.themoviedb.org/t/p/w220_and_h330_face/4ssDuvEDkSArWEdyBl2X5EHvYKU.jpg",
+          link: "https://pelispop.lat/pelicula/los-vengadores-2-la-era-de-ultron/",
+        },
+        {
+          title: "Ant-Man",
+          image:
+            "https://www.themoviedb.org/t/p/w220_and_h330_face/qDfBMd4kBpPx35LEgWKvS1JVKBy.jpg",
+          link: "https://pelispop.lat/pelicula/ant-man-el-hombre-hormiga/",
+        },
+        {
+          title: "Capitán América: Civil War",
+          image:
+            "https://www.themoviedb.org/t/p/w220_and_h330_face/jPPy7tCfglppQo6J9nGwU6UmJ8X.jpg",
+          link: "https://pelispop.lat/pelicula/capitan-america-civil-war/",
+        },
+        {
+          title: "Doctor Strange",
+          image:
+            "https://www.themoviedb.org/t/p/w220_and_h330_face/uZpmwyfL6sIq0yzn5Dbar8QXRNa.jpg",
+          link: "https://pelispop.lat/pelicula/doctor-strange-hechicero-supremo/",
+        },
+        {
+          title: "Guardians of the Galaxy Vol 2",
+          image:
+            "https://www.themoviedb.org/t/p/w220_and_h330_face/y4MBh0EjBlMuOzv9axM4qJlmhzz.jpg",
+          link: "https://pelispop.lat/pelicula/guardianes-de-la-galaxia-vol-2/",
+        },
+        {
+          title: "Thor: Ragnarok",
+          image:
+            "https://www.themoviedb.org/t/p/w220_and_h330_face/s7hV8HFh7w2EZ4GK5EiltRVvWJA.jpg",
+          link: "https://pelispop.lat/pelicula/thor-ragnarok/",
+        },
+        {
+          title: "Black Panther",
+          image:
+            "https://www.themoviedb.org/t/p/w220_and_h330_face/elAEwrNbLqVHojxilHz6NLW9no3.jpg",
+          link: "https://pelispop.lat/pelicula/pantera-negra/",
+        },
+        {
+          title: "Avengers: Infinity War",
+          image:
+            "https://www.themoviedb.org/t/p/w220_and_h330_face/9mvgmX2b05SERQWC1IAGIdkfd8n.jpg",
+          link: "https://pelispop.lat/pelicula/vengadores-infinity-war/",
+        },
+        {
+          title: "Ant-Man And The Wasp",
+          image:
+            "https://www.themoviedb.org/t/p/w220_and_h330_face/y0SIuZBqPserAa0iwXsbrSHjcWa.jpg",
+          link: "https://pelispop.lat/pelicula/ant-man-y-la-avispa/",
+        },
+        {
+          title: "Capitana Marvel",
+          image:
+            "https://www.themoviedb.org/t/p/w220_and_h330_face/5SPa7dZ85p54xa7E9tHRmfKq5ce.jpg",
+          link: "https://pelispop.lat/pelicula/capitana-marvel/",
+        },
+        {
+          title: "Avengers: Endgame",
+          image:
+            "https://www.themoviedb.org/t/p/w220_and_h330_face/fTFRY6RJTpwkrYybwj4Wdf5nfgn.jpg",
+          link: "https://pelispop.lat/pelicula/avengers-endgame/",
+        },
+        {
+          title: "Black Widow",
+          image:
+            "https://www.themoviedb.org/t/p/w220_and_h330_face/2No8qXpkdu4yfaWGtTqh02qo1Dq.jpg",
+          link: "https://pelispop.lat/pelicula/black-widow-123/",
+        },
+        {
+          title: "Shang-Chi y La Leyenda de los Diez Anillos",
+          image:
+            "https://www.themoviedb.org/t/p/w220_and_h330_face/aEUYugjHTxWEPmn8zacTTwQQPT0.jpg",
+          link: "https://pelispop.lat/pelicula/shang-chi-y-la-leyenda-de-los-diez-anillos/",
+        },
+        {
+          title: "Eternals",
+          image:
+            "https://www.themoviedb.org/t/p/w220_and_h330_face/zp85WEn9YKM3Cajk4m4ZDcbCHpp.jpg",
+          link: "https://pelispop.lat/pelicula/eternals/",
+        },
+        {
+          title: "Doctor Strange In The Multiverse Of Madness",
+          image:
+            "https://www.themoviedb.org/t/p/w220_and_h330_face/bWWciblTuuKXDkSrTXRV5aseLZy.jpg",
+          link: "https://pelispop.lat/pelicula/doctor-strange-en-el-multiverso-de-la-locura/",
+        },
+        {
+          title: "Thor: Love and Thunder",
+          image:
+            "https://www.themoviedb.org/t/p/w220_and_h330_face/z9ajF6E39Hg2pXUofmUYgZHvdX.jpg",
+          link: "https://pelispop.lat/pelicula/thor-amor-y-trueno/",
+        },
+        {
+          title: "Black Panther: Wakanda Forever",
+          image:
+            "https://www.themoviedb.org/t/p/w220_and_h330_face/3d10lpRDUt202g50a6G7pJngEGS.jpg",
+          link: "https://pelispop.lat/pelicula/pantera-negra-wakanda-por-siempre/",
+        },
+        {
+          title: "Ant-Man And The Wasp: Quantumania",
+          image:
+            "https://www.themoviedb.org/t/p/w220_and_h330_face/5JcuLWpKf85q5oy1NbzyFAGkhqx.jpg",
+          link: "https://pelispop.lat/pelicula/ant-man-y-la-avispa-quantumania/",
+        },
+        {
+          title: "Guardians Of The Galaxy Vol 3",
+          image:
+            "https://www.themoviedb.org/t/p/w220_and_h330_face/bRdR9EMEjDr5jxMRyt7fvGF0Hy2.jpg",
+          link: "https://pelispop.lat/pelicula/guardianes-de-la-galaxia-volumen-3/",
+        },
+        {
+          title: "Guardians Of The Galaxy Holidays Special",
+          image:
+            "https://www.themoviedb.org/t/p/w220_and_h330_face/yHJn0101wUGTqAhjly0flBrDBrl.jpg",
+          link: "https://pelispop.lat/pelicula/guardianes-de-la-galaxia-especial-felices-fiestas/",
+        },
+        {
+          title: "Deadpool",
+          image:
+            "https://www.themoviedb.org/t/p/w220_and_h330_face/tVquop2kI7vIhYoAqsNyhCTMR76.jpg",
+          link: "https://pelispop.lat/pelicula/deadpool/",
+        },
+        {
+          title: "Deadpool 2",
+          image:
+            "https://www.themoviedb.org/t/p/w220_and_h330_face/gyfPKfFYcVW54MoqhYlwwDDIfJR.jpg",
+          link: "https://pelispop.lat/pelicula/deadpool-2/",
+        },
+        {
+          title: "The Marvels",
+          image:
+            "https://media.themoviedb.org/t/p/w220_and_h330_face/hrVdil29WAT9Hrzc1qneBrn6xW9.jpg",
+          link: "https://pelispop.lat/movies/the-marvels-2023/",
+        },
+        {
+          title: "Deadpool & Wolverine",
+          image:
+            "https://media.themoviedb.org/t/p/w220_and_h330_face/wIwM0QhjS6BuoB5UrHykZWXOUh6.jpg",
+          link: "https://smartpelis.tv/pelicula/deadpool-wolverine/",
+        },
+        {
+          title: "Érase una vez un Deadpool",
+          image:
+            "https://media.themoviedb.org/t/p/w220_and_h330_face/2pxZzyELtA6shvkMZIpOl6ysr8l.jpg",
+          link: "https://smartpelis.tv/pelicula/habia-una-vez-un-deadpool/",
+        },
+        {
+          title: "Capitán América: Brave New World",
+          image:
+            "https://media.themoviedb.org/t/p/w220_and_h330_face/j7QbUVvN9qY4ygqDKgWA9dnuEo0.jpg",
+          link: "https://smartpelis.tv/pelicula/capitan-america-brave-new-world/",
+        },
+        {
+          title: "Thunderbolts*: *The New Avengers",
+          image:
+            "https://media.themoviedb.org/t/p/w220_and_h330_face/1I0ORYrbqZxtKmuwsoRIaajUvBg.jpg",
+          link: "https://smartpelis.tv/pelicula/thunderbolts/",
+        },
+      ];
+
+      // Ordenar el arreglo alfabéticamente por título
+      const sortedMovies = ucmMovies
+        .slice()
+        .sort((a, b) => a.title.localeCompare(b.title));
+
+      const movieContainer = document.getElementById("movie-container");
+
+      sortedMovies.forEach((movie) => {
+        const movieCard = document.createElement("div");
+        movieCard.classList.add("movie-card");
+        movieCard.style.width = "18rem";
+
+        const movieLink = document.createElement("a");
+        movieLink.href = movie.link;
+        movieLink.target = "_blank";
+        movieLink.style.textDecoration = "none";
+        movieLink.style.color = "black";
+
+        const movieImage = document.createElement("img");
+        movieImage.src = movie.image;
+        movieImage.alt = movie.title + " Poster";
+        movieImage.width = 80;
+        movieImage.height = 350;
+        movieImage.style.paddingRight = "5px";
+        movieImage.classList.add("card-img-top");
+
+        const movieTitle = document.createElement("span");
+        movieTitle.textContent = movie.title;
+        movieTitle.style.fontSize = "15px";
+        movieTitle.style.fontWeight = "bold";
+
+        movieLink.appendChild(movieImage);
+        movieLink.appendChild(movieTitle);
+
+        movieCard.appendChild(movieLink);
+
+        movieContainer.appendChild(movieCard);
+      });
+      const searchContainer = document.querySelector(".search-container");
+      const searchInput = document.getElementById("search-input");
+      const errorContainer = document.getElementById("error-container");
+
+      searchInput.addEventListener("input", (event) => {
+        const searchString = event.target.value.toLowerCase();
+        movieContainer.innerHTML = ""; // Limpiar contenido previo
+
+        const filteredMovies = sortedMovies.filter((movie) =>
+          movie.title.toLowerCase().includes(searchString)
+        );
+
+        filteredMovies.forEach((movie) => {
+          const movieCard = createMovieCard(movie);
+          movieContainer.appendChild(movieCard);
+        });
+        if (filteredMovies.length === 0) {
+          errorContainer.classList.remove("hidden");
+        } else {
+          errorContainer.classList.add("hidden");
+        }
+      });
+      function createMovieCard(movie) {
+        const movieCard = document.createElement("div");
+        movieCard.classList.add("movie-card");
+        movieCard.style.width = "18rem";
+
+        const movieLink = document.createElement("a");
+        movieLink.href = movie.link;
+        movieLink.target = "_blank";
+        movieLink.style.textDecoration = "none";
+        movieLink.style.color = "black";
+
+        const movieImage = document.createElement("img");
+        movieImage.src = movie.image;
+        movieImage.alt = movie.title + " Poster";
+        movieImage.width = 80;
+        movieImage.height = 350;
+        movieImage.style.paddingRight = "5px";
+        movieImage.classList.add("card-img-top");
+
+        const movieTitle = document.createElement("span");
+        movieTitle.textContent = movie.title;
+        movieTitle.style.fontSize = "15px";
+        movieTitle.style.fontWeight = "bold";
+
+        movieLink.appendChild(movieImage);
+        movieLink.appendChild(movieTitle);
+
+        movieCard.appendChild(movieLink);
+
+        return movieCard;
+      }
+    </script>
+    <footer>
+      <div id="goc-ft" data-country="inc-lat" style="display: block">
+        <section id="goc-ft-help">
+          <h2 class="outline"></h2>
+          <div id="goc-ft-logo">
+            <!-- Replace 'your-logo-path' with the actual path to your Marvel logo image -->
+            <img
+              src="../img/Marvel_Logo.svg.png"
+              alt="Marvel Logo"
+              width="150"
+              height="50"
+            />
+          </div>
+          <nav role="navigation" aria-labelledby="about-legal-heading">
+            <h3 id="about-legal-heading" class="outline">About and Legal</h3>
+            <ul id="goc-ft-about">
+              <li>
+                <a
+                  href="https://privacy.thewaltdisneycompany.com/es-es/politica-de-privacidad/"
+                  >Política de Privacidad</a
+                >
+              </li>
+              <li>
+                <a href="https://disneytermsofuse.com/spanish-latin-american/"
+                  >Términos de uso</a
+                >
+              </li>
+              <li>
+                <a href="https://empleos.disneycareers.com/"
+                  >Oportunidades laborales</a
+                >
+              </li>
+              <li>
+                <a
+                  href="http://preferences-mgr.truste.com/?type=disneycolor&amp;affiliateId=115"
+                  >Anuncios basados en intereses</a
+                >
+              </li>
+            </ul>
+            <ul id="goc-ft-legal">
+              <!-- Add any additional legal links if needed -->
+            </ul>
+            <div id="goc-ft-copyright">
+              © Disney © Disney•Pixar © &amp; ™ Lucasfilm LTD © 2023 MARVEL.
+              Reservados todos los derechos,
+              <span class="branding">Disney Entertainment</span>
+            </div>
+          </nav>
+        </section>
+      </div>
+    </footer>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

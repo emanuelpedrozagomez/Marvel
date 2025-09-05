@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../css/styles.css" />
+    <link rel="icon" href="../img/hombre-arana.png" type="image/ico" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+      crossorigin="anonymous"
+    />
+    <title>Peliculas Spider-Man</title>
+  </head>
+  <body>
+    <div class="container">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="../index.html">
+            <img
+              src="../img/Marvel_Logo.svg.png"
+              alt="logo"
+              width="100"
+              height="50"
+              class="img-fluid"
+            />
+          </a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="../index.html"
+                  >Inicio</a
+                >
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="../peliculas/index.html">Peliculas</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="../series/index.html">Series</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" href="index.html">Spider-Man</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="../animacion/index.html">Animacion</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="../comics/index.html">Comics</a>
+              </li>
+            </ul>
+          </div>
+          <div class="search-container">
+            <input
+              type="text"
+              id="search-input"
+              placeholder="Buscar Peliculas..."
+              class="form-control"
+            />
+          </div>
+        </div>
+      </nav>
+    </div>
+    <div
+      id="spiderman-movies-container"
+      style="
+        padding-left: 80px;
+        padding-right: 80px;
+        padding-bottom: 20px;
+        padding-top: 20px;
+        margin-top: 75px;
+      "
+    ></div>
+    <div id="error-container" class="hidden">
+      <img src="../img/404-page-not-found-0.svg" alt="svg" />
+    </div>
+    <script>
+      const spidermanMovies = [
+        {
+          title: "Spider-Man: Homecoming",
+          image:
+            "https://www.themoviedb.org/t/p/w220_and_h330_face/c24sv2weTHPsmDa7jEMN0m2P3RT.jpg",
+          link: "https://pelispop.lat/pelicula/spider-man-de-regreso-a-casa/",
+        },
+        {
+          title: "Spider-Man: Far From Home",
+          image:
+            "https://www.themoviedb.org/t/p/w220_and_h330_face/iKVR1ba3W1wCm9bVCcpnNvxQUWX.jpg",
+          link: "https://pelispop.lat/pelicula/spider-man-lejos-de-casa-123-123/",
+        },
+        {
+          title: "Spider-Man: No Way Home",
+          image:
+            "https://www.themoviedb.org/t/p/w220_and_h330_face/miZFgV81xG324rpUknQX8dtXuBl.jpg",
+          link: "https://pelispop.lat/pelicula/spider-man-sin-camino-a-casa/",
+        },
+        {
+          title: "Spider-Man",
+          image:
+            "https://www.themoviedb.org/t/p/w220_and_h330_face/bCDaKZLRkrVVtPNyHxUfKvepW1N.jpg",
+          link: "https://pelispop.lat/pelicula/spider-man/",
+        },
+        {
+          title: "Spider-Man 2",
+          image:
+            "https://www.themoviedb.org/t/p/w220_and_h330_face/p9R3lUNzpHnivyGpKwEPUNGdmmH.jpg",
+          link: "https://pelispop.lat/pelicula/el-hombre-arana-2-123/",
+        },
+        {
+          title: "Spider-Man 3",
+          image:
+            "https://www.themoviedb.org/t/p/w220_and_h330_face/lkuQzlShE2uzJcsZYU4zBI4VQZP.jpg",
+          link: "https://pelispop.lat/pelicula/el-hombre-arana-3/",
+        },
+        {
+          title: "The Amazing Spider-Man",
+          image:
+            "https://www.themoviedb.org/t/p/w220_and_h330_face/bUTvy463oYc7oPflr6eDw3CHWNE.jpg",
+          link: "https://pelispop.lat/pelicula/el-sorprendente-hombre-arana-123/",
+        },
+        {
+          title: "The Amazing Spider-Man 2: El Poder de Electro",
+          image:
+            "https://www.themoviedb.org/t/p/w220_and_h330_face/8W0mMrmaVdSoLz5LnX61gJOXfEb.jpg",
+          link: "https://pelispop.lat/pelicula/el-sorprendente-hombre-arana-2-la-amenaza-de-electro-123/",
+        },
+        {
+          title: "Spider-Man: Into the Spider-Verse",
+          image:
+            "https://www.themoviedb.org/t/p/w220_and_h330_face/3cZn1k8x0bikrDKEy9ZKJ6Vdj30.jpg",
+          link: "https://pelispop.lat/pelicula/spider-man-un-nuevo-universo/",
+        },
+        {
+          title: "Spider-Man: Across the Spider-Verse",
+          image:
+            "https://www.themoviedb.org/t/p/w220_and_h330_face/8Vt6mWEReuy4Of61Lnj5Xj704m8.jpg",
+          link: "https://pelispop.lat/pelicula/spider-man-a-traves-del-spider-verso/",
+        },
+        {
+          title: "Venom",
+          image:
+            "https://www.themoviedb.org/t/p/w220_and_h330_face/n8bB5sZOfPJn2kg1ZzB5I42OxpK.jpg",
+          link: "https://pelispop.lat/pelicula/venom/",
+        },
+        {
+          title: "Venom: Let There Be Carnage",
+          image:
+            "https://www.themoviedb.org/t/p/w220_and_h330_face/pzKsRuKLFmYrW5Q0q8E8G78Tcgo.jpg",
+          link: "https://pelispop.lat/pelicula/venom-carnage-liberado/",
+        },
+        {
+          title: "Morbius",
+          image:
+            "https://www.themoviedb.org/t/p/w220_and_h330_face/6JjfSchsU6daXk2AKX8EEBjO3Fm.jpg",
+          link: "https://pelispop.lat/pelicula/morbius/",
+        },
+        {
+          title: "Venom: the last dance",
+          image:
+            "https://media.themoviedb.org/t/p/w220_and_h330_face/8F74DwgFxTIBNtbqSLjR7zWmnHh.jpg",
+          link: "https://smartpelis.tv/pelicula/venom-el-ultimo-baile/",
+        },
+      ];
+
+      const sortedSpidermanMovies = spidermanMovies
+        .slice()
+        .sort((a, b) => a.title.localeCompare(b.title));
+
+      const spidermanMoviesContainer = document.getElementById(
+        "spiderman-movies-container"
+      );
+
+      sortedSpidermanMovies.forEach((movie) => {
+        const spidermanMovieCard = createSpidermanMovieCard(movie);
+        spidermanMoviesContainer.appendChild(spidermanMovieCard);
+      });
+
+      const searchContainer = document.querySelector(".search-container");
+      const searchInput = document.getElementById("search-input");
+      const errorContainer = document.getElementById("error-container");
+
+      searchInput.addEventListener("input", (event) => {
+        const searchString = event.target.value.toLowerCase();
+        spidermanMoviesContainer.innerHTML = ""; // Limpiar contenido previo
+
+        const filteredSpidermanMovies = sortedSpidermanMovies.filter((movie) =>
+          movie.title.toLowerCase().includes(searchString)
+        );
+
+        filteredSpidermanMovies.forEach((movie) => {
+          const spidermanMovieCard = createSpidermanMovieCard(movie);
+          spidermanMoviesContainer.appendChild(spidermanMovieCard);
+        });
+        if (filteredSpidermanMovies.length === 0) {
+          errorContainer.classList.remove("hidden");
+        } else {
+          errorContainer.classList.add("hidden");
+        }
+      });
+
+      function createSpidermanMovieCard(movie) {
+        const spidermanMovieCard = document.createElement("div");
+        spidermanMovieCard.classList.add("movie-card");
+        spidermanMovieCard.style.width = "18rem";
+
+        const movieLink = document.createElement("a");
+        movieLink.href = movie.link;
+        movieLink.target = "_blank";
+        movieLink.style.textDecoration = "none";
+        movieLink.style.color = "black";
+
+        const movieImage = document.createElement("img");
+        movieImage.src = movie.image;
+        movieImage.alt = movie.title + " Poster";
+        movieImage.width = 80;
+        movieImage.height = 350;
+        movieImage.style.paddingRight = "5px";
+        movieImage.classList.add("card-img-top");
+
+        const movieTitle = document.createElement("span");
+        movieTitle.textContent = movie.title;
+        movieTitle.style.fontSize = "15px";
+        movieTitle.style.fontWeight = "bold";
+
+        movieLink.appendChild(movieImage);
+        movieLink.appendChild(movieTitle);
+
+        spidermanMovieCard.appendChild(movieLink);
+
+        return spidermanMovieCard;
+      }
+    </script>
+    <footer>
+      <div id="goc-ft" data-country="inc-lat" style="display: block">
+        <section id="goc-ft-help">
+          <h2 class="outline"></h2>
+          <div id="goc-ft-logo">
+            <!-- Replace 'your-logo-path' with the actual path to your Marvel logo image -->
+            <img
+              src="../img/Marvel_Logo.svg.png"
+              alt="Marvel Logo"
+              width="150"
+              height="50"
+            />
+          </div>
+          <nav role="navigation" aria-labelledby="about-legal-heading">
+            <h3 id="about-legal-heading" class="outline">About and Legal</h3>
+            <ul id="goc-ft-about">
+              <li>
+                <a
+                  href="https://privacy.thewaltdisneycompany.com/es-es/politica-de-privacidad/"
+                  >Política de Privacidad</a
+                >
+              </li>
+              <li>
+                <a href="https://disneytermsofuse.com/spanish-latin-american/"
+                  >Términos de uso</a
+                >
+              </li>
+              <li>
+                <a href="https://empleos.disneycareers.com/"
+                  >Oportunidades laborales</a
+                >
+              </li>
+              <li>
+                <a
+                  href="http://preferences-mgr.truste.com/?type=disneycolor&amp;affiliateId=115"
+                  >Anuncios basados en intereses</a
+                >
+              </li>
+            </ul>
+            <ul id="goc-ft-legal">
+              <!-- Add any additional legal links if needed -->
+            </ul>
+            <div id="goc-ft-copyright">
+              © Disney © Disney•Pixar © &amp; ™ Lucasfilm LTD © 2023 MARVEL.
+              Reservados todos los derechos,
+              <span class="branding">Disney Entertainment</span>
+            </div>
+          </nav>
+        </section>
+      </div>
+    </footer>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

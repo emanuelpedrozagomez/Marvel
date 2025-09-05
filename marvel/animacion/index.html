@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../css/styles.css" />
+    <link rel="icon" href="../img/marvel_logo.ico" type="image/ico" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+      crossorigin="anonymous"
+    />
+    <title>Animacion de Marvel</title>
+  </head>
+  <body>
+    <div class="container">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="../index.html">
+            <img
+              src="../img/Marvel_Logo.svg.png"
+              alt="logo"
+              width="100"
+              height="50"
+              class="img-fluid"
+            />
+          </a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="../index.html"
+                  >Inicio</a
+                >
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="../peliculas/index.html">Peliculas</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="../series/index.html">Series</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="../spider-man/index.html"
+                  >Spider-Man</a
+                >
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" href="index.html">Animacion</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="../comics/index.html">Comics</a>
+              </li>
+            </ul>
+          </div>
+          <div class="search-container">
+            <input
+              type="text"
+              id="search-input"
+              placeholder="Buscar Series..."
+              class="form-control"
+            />
+          </div>
+        </div>
+      </nav>
+    </div>
+    <div
+      id="animated-series-container"
+      style="
+        padding-left: 80px;
+        padding-right: 80px;
+        padding-bottom: 20px;
+        padding-top: 20px;
+        margin-top: 75px;
+      "
+    ></div>
+    <div id="error-container" class="hidden">
+      <img src="../img/404-page-not-found-0.svg" alt="svg" />
+    </div>
+    <script>
+      const animatedSeries = [
+        {
+          title: "Spider-Man: The Animated Series",
+          image:
+            "https://www.themoviedb.org/t/p/w220_and_h330_face/peN9aqevr0edVoctVKGZDWFdTRl.jpg",
+          link: "https://www.lacartoons.com/serie/79",
+        },
+        {
+          title: "X-Men: The Animated Series",
+          image:
+            "https://www.themoviedb.org/t/p/w220_and_h330_face/jRGOY8KvL7hHrJcfKfXe99C4pc5.jpg",
+          link: "https://www.lacartoons.com/serie/173",
+        },
+        {
+          title: "Iron Man: The Animated Series",
+          image:
+            "https://www.themoviedb.org/t/p/w220_and_h330_face/nTQWWH6CFtl37x1nPx8HRwbwvGn.jpg",
+          link: "https://www.lacartoons.com/serie/292",
+        },
+        {
+          title: "Spider-Man: The New Animated Series",
+          image:
+            "https://www.themoviedb.org/t/p/w220_and_h330_face/z4CRC612QrGrC1kLtDm8ykLeIrs.jpg",
+          link: "https://www.lacartoons.com/serie/33",
+        },
+        {
+          title: "The Spectacular Spider-Man",
+          image:
+            "https://www.themoviedb.org/t/p/w220_and_h330_face/gYsoifD5LWHlWFf1OOcUIJlagf3.jpg",
+          link: "https://www.lacartoons.com/serie/391",
+        },
+        {
+          title: "Ultimate Spider-Man",
+          image:
+            "https://www.themoviedb.org/t/p/w220_and_h330_face/p276PkRJ5Wexq91DA5RkbxTYMDn.jpg",
+          link: "https://www.lacartoons.com/serie/390",
+        },
+        {
+          title: "Avengers: Los Héroes Más Poderosos Del Planeta",
+          image:
+            "https://www.themoviedb.org/t/p/w220_and_h330_face/nH1ROb4ujGRuDItJyn5UrYY5uOB.jpg",
+          link: "https://www.lacartoons.com/serie/170",
+        },
+        {
+          title: "Avengers Assemble",
+          image:
+            "https://www.themoviedb.org/t/p/w220_and_h330_face/vchDkX1DtqTy3bIDJ7YqmSbX965.jpg",
+          link: "https://www.lacartoons.com/serie/213",
+        },
+        {
+          title: "The Fantastic Four The Animated Series",
+          image:
+            "https://www.themoviedb.org/t/p/w220_and_h330_face/kEyV8MffIg2Zmmaif5GHeiHYHq4.jpg",
+          link: "https://www.lacartoons.com/serie/208",
+        },
+        {
+          title: "Iron Man: Aventuras de Hierro",
+          image:
+            "https://www.themoviedb.org/t/p/w220_and_h330_face/uwMIL8PR1jHpHQksIq7kzdeqg2A.jpg",
+          link: "https://www.lacartoons.com/serie/211",
+        },
+        {
+          title: "Big Hero 6: Grandes Héroes",
+          image:
+            "https://www.themoviedb.org/t/p/w220_and_h330_face/qVU0ag4i5BCmH5h4o04cdvUo0Zf.jpg",
+          link: "https://pelispop.lat/pelicula/big-hero-6/",
+        },
+        {
+          title: "El Increible Hulk",
+          image:
+            "https://www.themoviedb.org/t/p/w220_and_h330_face/wa60s9NSvrH87NFCArmobnIyNnh.jpg",
+          link: "https://www.lacartoons.com/serie/207",
+        },
+        {
+          title: "Spider-Man y sus sorprendentes amigos",
+          image:
+            "https://www.themoviedb.org/t/p/w220_and_h330_face/Amg8OOGPffRLR1LMjCkF7S0JzjM.jpg",
+          link: "https://www.lacartoons.com/serie/78",
+        },
+        {
+          title: "Spider-Man Unlimited",
+          image:
+            "https://www.themoviedb.org/t/p/w220_and_h330_face/fvmC5QzQwkI5ZNJauE4xpF24PTB.jpg",
+          link: "https://www.lacartoons.com/serie/80",
+        },
+        {
+          title: "Silver Surfer",
+          image:
+            "https://www.themoviedb.org/t/p/w220_and_h330_face/uO4uvQMH7yysdDXoJLj33KK0VFU.jpg",
+          link: "https://www.lacartoons.com/serie/81",
+        },
+        {
+          title: "Spider-Woman",
+          image:
+            "https://www.themoviedb.org/t/p/w220_and_h330_face/cXiD1jVLjTyvO3w2jKq9QdlAYag.jpg",
+          link: "https://www.lacartoons.com/serie/82",
+        },
+        {
+          title: "LEGO Marvel Superheroes - Avengers: Reassembled!",
+          image:
+            "https://www.themoviedb.org/t/p/w220_and_h330_face/xUBZNoY7idPfqKZepnDEv7Qc8GC.jpg",
+          link: "https://vix.com/es-es/detail/series-3776",
+        },
+        {
+          title: "LEGO Marvel Superheroes - Maximum Overload",
+          image:
+            "https://www.themoviedb.org/t/p/w220_and_h330_face/ry0N6rxZCuhCPUJRSzF8l3gcwqY.jpg",
+          link: "https://vix.com/es-es/detail/series-3778",
+        },
+        {
+          title: "Marvel Guardianes de la Galaxia",
+          image:
+            "https://www.themoviedb.org/t/p/w220_and_h330_face/oXwe3wVhdvvxiixL9UJf6PgBybZ.jpg",
+          link: "https://pelispop.lat/series/guardianes-de-la-galaxia/",
+        },
+        {
+          title: "Iron Man y Hulk: Heroes Unidos",
+          image:
+            "https://www.themoviedb.org/t/p/w220_and_h330_face/xz9WKyI3Bz33HzsR7hQgPpIoiC9.jpg",
+          link: "https://pelispop.lat/pelicula/iron-man-y-hulk-heroes-unidos/",
+        },
+        {
+          title: "Hulk y los Agentes S.M.A.S.H",
+          image:
+            "https://www.themoviedb.org/t/p/w220_and_h330_face/sPe9KTADqXFoAfSruep8Dfg4uDS.jpg",
+          link: "https://www.youtube.com/playlist?list=PLZOjTLWNZKw2wcZC53p4GQsJ_4GXEqS3n",
+        },
+        {
+          title: "SPIDEY y sus sorprendentes amigos",
+          image:
+            "https://www.themoviedb.org/t/p/w220_and_h330_face/At4064DPDUjtEjOdQhDBVC3kWQW.jpg",
+          link: "https://www.youtube.com/playlist?list=PLCqPoEhJGCXdNzKTL2wWT3v6q5ce08N7k",
+        },
+        {
+          title: "Marvel Anime: Iron Man",
+          image:
+            "https://www.themoviedb.org/t/p/w220_and_h330_face/zOTJT7JbzSrMBX2OCGPqUnkQA4y.jpg",
+          link: "https://www.lacartoons.com/serie/204",
+        },
+        {
+          title: "Marvel Anime: X-MEN",
+          image:
+            "https://www.themoviedb.org/t/p/w220_and_h330_face/sXNDCbP5sjq1FeXBxGovN21VVOG.jpg",
+          link: "https://www.lacartoons.com/serie/187",
+        },
+        {
+          title: "Marvel Anime: Blade",
+          image:
+            "https://www.themoviedb.org/t/p/w220_and_h330_face/luy5i4x1IKAnDli34hVVSF3vD2v.jpg",
+          link: "https://www.lacartoons.com/serie/171",
+        },
+        {
+          title: "X-MEN '97",
+          image:
+            "https://media.themoviedb.org/t/p/w220_and_h330_face/fl4KPqVTKT44UlTBA8ajDtRNx6o.jpg",
+          link: "https://pelispop.lat/series/x-men-97-2024/",
+        },
+        {
+          title: "Tu amigo y vecino Spider-Man",
+          image:
+            "https://media.themoviedb.org/t/p/w220_and_h330_face/iHT2NVIU1SICNYz7XWsvW09GcLL.jpg",
+          link: "https://smartpelis.tv/serie/tu-amigo-y-vecino-spider-man/",
+        },
+      ];
+
+      const sortedAnimatedSeries = animatedSeries
+        .slice()
+        .sort((a, b) => a.title.localeCompare(b.title));
+
+      const animatedSeriesContainer = document.getElementById(
+        "animated-series-container"
+      );
+
+      sortedAnimatedSeries.forEach((series) => {
+        const animatedSeriesCard = createAnimatedSeriesCard(series);
+        animatedSeriesContainer.appendChild(animatedSeriesCard);
+      });
+
+      const searchContainer = document.querySelector(".search-container");
+      const searchInput = document.getElementById("search-input");
+      const errorContainer = document.getElementById("error-container");
+
+      searchInput.addEventListener("input", (event) => {
+        const searchString = event.target.value.toLowerCase();
+        animatedSeriesContainer.innerHTML = ""; // Limpiar contenido previo
+
+        const filteredAnimatedSeries = sortedAnimatedSeries.filter((series) =>
+          series.title.toLowerCase().includes(searchString)
+        );
+
+        filteredAnimatedSeries.forEach((series) => {
+          const animatedSeriesCard = createAnimatedSeriesCard(series);
+          animatedSeriesContainer.appendChild(animatedSeriesCard);
+        });
+        if (filteredAnimatedSeries.length === 0) {
+          errorContainer.classList.remove("hidden");
+        } else {
+          errorContainer.classList.add("hidden");
+        }
+      });
+
+      function createAnimatedSeriesCard(series) {
+        const animatedSeriesCard = document.createElement("div");
+        animatedSeriesCard.classList.add("movie-card");
+        animatedSeriesCard.style.width = "18rem";
+
+        const seriesLink = document.createElement("a");
+        seriesLink.href = series.link;
+        seriesLink.target = "_blank";
+        seriesLink.style.textDecoration = "none";
+        seriesLink.style.color = "black";
+
+        const seriesImage = document.createElement("img");
+        seriesImage.src = series.image;
+        seriesImage.alt = series.title + " Poster";
+        seriesImage.width = 80;
+        seriesImage.height = 350;
+        seriesImage.style.paddingRight = "5px";
+        seriesImage.classList.add("card-img-top");
+
+        const seriesTitle = document.createElement("span");
+        seriesTitle.textContent = series.title;
+        seriesTitle.style.fontSize = "15px";
+        seriesTitle.style.fontWeight = "bold";
+
+        seriesLink.appendChild(seriesImage);
+        seriesLink.appendChild(seriesTitle);
+
+        animatedSeriesCard.appendChild(seriesLink);
+
+        return animatedSeriesCard;
+      }
+    </script>
+    <footer>
+      <div id="goc-ft" data-country="inc-lat" style="display: block">
+        <section id="goc-ft-help">
+          <h2 class="outline"></h2>
+          <div id="goc-ft-logo">
+            <!-- Replace 'your-logo-path' with the actual path to your Marvel logo image -->
+            <img
+              src="../img/Marvel_Logo.svg.png"
+              alt="Marvel Logo"
+              width="150"
+              height="50"
+            />
+          </div>
+          <nav role="navigation" aria-labelledby="about-legal-heading">
+            <h3 id="about-legal-heading" class="outline">About and Legal</h3>
+            <ul id="goc-ft-about">
+              <li>
+                <a
+                  href="https://privacy.thewaltdisneycompany.com/es-es/politica-de-privacidad/"
+                  >Política de Privacidad</a
+                >
+              </li>
+              <li>
+                <a href="https://disneytermsofuse.com/spanish-latin-american/"
+                  >Términos de uso</a
+                >
+              </li>
+              <li>
+                <a href="https://empleos.disneycareers.com/"
+                  >Oportunidades laborales</a
+                >
+              </li>
+              <li>
+                <a
+                  href="http://preferences-mgr.truste.com/?type=disneycolor&amp;affiliateId=115"
+                  >Anuncios basados en intereses</a
+                >
+              </li>
+            </ul>
+            <ul id="goc-ft-legal">
+              <!-- Add any additional legal links if needed -->
+            </ul>
+            <div id="goc-ft-copyright">
+              © Disney © Disney•Pixar © &amp; ™ Lucasfilm LTD © 2023 MARVEL.
+              Reservados todos los derechos,
+              <span class="branding">Disney Entertainment</span>
+            </div>
+          </nav>
+        </section>
+      </div>
+    </footer>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

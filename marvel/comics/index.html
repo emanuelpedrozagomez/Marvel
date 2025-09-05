@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="../img/marvel_logo.ico" type="image/ico" />
+    <link rel="stylesheet" href="../css/comics.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+      crossorigin="anonymous"
+    />
+    <title>Cómics de Marvel</title>
+  </head>
+  <body>
+    <div class="container">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="../index.html">
+            <img
+              src="../img/Marvel_Logo.svg.png"
+              alt="logo"
+              width="100"
+              height="50"
+              class="img-fluid"
+            />
+          </a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="../index.html"
+                  >Inicio</a
+                >
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="../peliculas/index.html">Películas</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="../series/index.html">Series</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="../spider-man/index.html"
+                  >Spider-Man</a
+                >
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="../animacion/index.html">Animacion</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" href="index.html">Comics</a>
+              </li>
+            </ul>
+          </div>
+          <div class="search-container">
+            <input
+              type="text"
+              id="search-input"
+              placeholder="Buscar cómics..."
+              class="form-control"
+            />
+          </div>
+        </div>
+      </nav>
+    </div>
+    <div
+      id="comic-container"
+      style="
+        padding-left: 80px;
+        padding-right: 80px;
+        padding-bottom: 20px;
+        padding-top: 20px;
+        margin-top: 50px;
+      "
+    ></div>
+    <div id="error-container" class="hidden">
+      <img src="../img/404-page-not-found-0.svg" alt="svg" />
+    </div>
+    <script>
+      const marvelComics = [
+        {
+          title: "The Amazing Spider-Man Vol 1 No. 1",
+          image: "https://m.media-amazon.com/images/I/61OldqqLvCL.jpg",
+          link: "https://issuu.com/luisgonzalez245/docs/tasm_1",
+        },
+        {
+          title: "The Amazing Spider-Man Vol 3 No. 9",
+          image:
+            "https://m.media-amazon.com/images/I/518Lrn3Z8vL._AC_UF1000,1000_QL80_.jpg",
+          link: "https://issuu.com/luisgonzalez245/docs/the_amazing_spider_man_vol._3_009",
+        },
+        {
+          title: "Civil War",
+          image:
+            "https://m.media-amazon.com/images/I/91SrXME-aTL._AC_UF894,1000_QL80_.jpg",
+          link: "https://issuu.com/revistascomics/docs/civil_war_1",
+        },
+        {
+          title: "Avengers vol 1 1",
+          image: "https://m.media-amazon.com/images/I/611JDXNR8OL.jpg",
+          link: "https://issuu.com/ricardo0049/docs/avengers__1",
+        },
+        {
+          title: "Avengers vol 1 4",
+          image:
+            "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1435843776i/25836763.jpg",
+          link: "https://issuu.com/menav/docs/avengers_04",
+        },
+        {
+          title: "Avengers VS X-MEN",
+          image:
+            "https://m.media-amazon.com/images/I/91v8-xwGMhL._AC_UF894,1000_QL80_.jpg",
+          link: "https://issuu.com/joshuu/docs/ilovepdf_merged",
+        },
+        {
+          title: "Marvel's Superheroes Secret Wars vol 1 8",
+          image: "https://m.media-amazon.com/images/I/61KiaUc5h1L.jpg",
+          link: "https://issuu.com/luisgonzalez245/docs/marvel_superheroes_secret_wars__198_102ff214530fd7",
+        },
+        {
+          title: "Daredevil vol 1 1",
+          image: "https://m.media-amazon.com/images/I/81T7HPWykXL.jpg",
+          link: "https://issuu.com/luisgonzalez245/docs/daredevil_vol1__01",
+        },
+        {
+          title: "Captain America Vol 9 1",
+          image:
+            "https://m.media-amazon.com/images/I/51SfMsavC3L._AC_UF1000,1000_QL80_.jpg",
+          link: "https://issuu.com/bryanmartinez23/docs/captain-america-001-2018-digital-infinity-comics-",
+        },
+        {
+          title: "Black Panther Vol 1 1",
+          image:
+            "https://m.media-amazon.com/images/I/81tXQKU8wPL._AC_UF894,1000_QL80_.jpg",
+          link: "https://issuu.com/bryanmartinez23/docs/black-panther-01-9r-",
+        },
+        {
+          title: "The Invincible Iron Man Vol 4 1",
+          image:
+            "https://m.media-amazon.com/images/I/51ompDWJ6FL._AC_UF1000,1000_QL80_.jpg",
+          link: "https://issuu.com/iamchyno/docs/anyconv.com_the_invincible_iron_man_v4_01",
+        },
+        {
+          title: "Yo Soy Groot Vol 1 1",
+          image: "https://m.media-amazon.com/images/I/51LSr95mMjL.jpg",
+          link: "https://issuu.com/iamchyno/docs/anyconv.com_yo_soy_groot_vol.1_01",
+        },
+        {
+          title: "Yo Soy Groot Vol 1 2",
+          image: "https://m.media-amazon.com/images/I/61oiM+aV6lL.jpg",
+          link: "https://issuu.com/iamchyno/docs/anyconv.com_yo_soy_groot_vol.1_02",
+        },
+        {
+          title: "Yo Soy Groot Vol 1 3",
+          image: "https://m.media-amazon.com/images/I/612Q0saGnyL.jpg",
+          link: "https://issuu.com/iamchyno/docs/anyconv.com_yo_soy_groot_vol.1_03",
+        },
+        {
+          title: "Captain America Vol 6 1",
+          image:
+            "https://m.media-amazon.com/images/I/716acZQmDML._AC_UF894,1000_QL80_.jpg",
+          link: "https://issuu.com/nicd10/docs/16__capitan_america_vol_6",
+        },
+        {
+          title: "Captain America Vol 6 26",
+          image:
+            "https://m.media-amazon.com/images/I/61fR1onNlJL._AC_UF894,1000_QL80_.jpg",
+          link: "https://issuu.com/nicd10/docs/26__capitan_america_vol_6",
+        },
+        {
+          title: "Captain America 1",
+          image: "https://m.media-amazon.com/images/I/41MH+6h6AbL.jpg",
+          link: "https://issuu.com/nicd10/docs/capitan_america_.1",
+        },
+        {
+          title: "Captain America 2",
+          image: "https://m.media-amazon.com/images/I/51lJcqLI8tL.jpg",
+          link: "https://issuu.com/nicd10/docs/capitan_america_.2",
+        },
+        {
+          title: "Captain America 3",
+          image: "https://m.media-amazon.com/images/I/51DQOF5zvLL.jpg",
+          link: "https://issuu.com/nicd10/docs/capitan_america_.3",
+        },
+        {
+          title: "Captain America 4",
+          image:
+            "https://uruloki.org/felipeblog/images2011-2/20110805-capitanamerica.jpg",
+          link: "https://issuu.com/nicd10/docs/capitan_america_.4",
+        },
+        {
+          title: "The Inmortal Hulk Vol 1 1",
+          image:
+            "https://m.media-amazon.com/images/I/919B0KGiR8L._AC_UF894,1000_QL80_.jpg",
+          link: "https://issuu.com/bryanmartinez23/docs/the-immortal-hulk-001-718-ic",
+        },
+        {
+          title: "Daredevil Vol 1 227",
+          image:
+            "https://cdn.marvel.com/u/prod/marvel/i/mg/1/a0/5b4f5ddbaa5b0/clean.jpg",
+          link: "https://issuu.com/anibal7832/docs/ddba_1de7",
+        },
+        {
+          title: "Daredevil Vol 1 228",
+          image:
+            "https://cdn.marvel.com/u/prod/marvel/i/mg/7/10/5b4f6a9f94309/clean.jpg",
+          link: "https://issuu.com/anibal7832/docs/ddba_2de7",
+        },
+        {
+          title: "Daredevil Vol 1 229",
+          image:
+            "https://cdn.marvel.com/u/prod/marvel/i/mg/d/40/5b4f88f9d8a3c/clean.jpg",
+          link: "https://issuu.com/anibal7832/docs/ddba_3de7",
+        },
+        {
+          title: "Daredevil Vol 1 230",
+          image:
+            "https://cdn.marvel.com/u/prod/marvel/i/mg/6/a0/5b4f918732cb5/clean.jpg",
+          link: "https://issuu.com/anibal7832/docs/ddba_4de7",
+        },
+        {
+          title: "Daredevil Vol 1 231",
+          image:
+            "https://cdn.marvel.com/u/prod/marvel/i/mg/9/f0/5b4f9af44717f/clean.jpg",
+          link: "https://issuu.com/anibal7832/docs/ddba_5de7",
+        },
+        {
+          title: "Daredevil Vol 1 232",
+          image:
+            "https://cdn.marvel.com/u/prod/marvel/i/mg/9/50/5b508b52cff26/clean.jpg",
+          link: "https://issuu.com/anibal7832/docs/ddba_6de7",
+        },
+        {
+          title: "Daredevil Vol 1 233",
+          image:
+            "https://cdn.marvel.com/u/prod/marvel/i/mg/6/90/5b50997a18a3e/clean.jpg",
+          link: "https://issuu.com/anibal7832/docs/ddba_7de7",
+        },
+      ];
+
+      const sortedComics = marvelComics
+        .slice()
+        .sort((a, b) => a.title.localeCompare(b.title));
+      const comicContainer = document.getElementById("comic-container");
+
+      sortedComics.forEach((comic) => {
+        const comicCard = document.createElement("div");
+        comicCard.classList.add("comic-card");
+        comicCard.style.width = "18rem";
+
+        const comicLink = document.createElement("a");
+        comicLink.href = comic.link;
+        comicLink.target = "_blank";
+        comicLink.style.textDecoration = "none";
+        comicLink.style.color = "black";
+
+        const comicImage = document.createElement("img");
+        comicImage.src = comic.image;
+        comicImage.alt = comic.title + " Cover";
+        comicImage.width = 220;
+        comicImage.height = 330;
+        comicImage.style.paddingRight = "5px";
+        comicImage.classList.add("card-img-top");
+
+        const comicTitle = document.createElement("span");
+        comicTitle.textContent = comic.title;
+        comicTitle.style.fontSize = "15px";
+        comicTitle.style.fontWeight = "bold";
+
+        comicLink.appendChild(comicImage);
+        comicLink.appendChild(comicTitle);
+
+        comicCard.appendChild(comicLink);
+
+        comicContainer.appendChild(comicCard);
+      });
+
+      const searchContainer = document.querySelector(".search-container");
+      const searchInput = document.getElementById("search-input");
+      const errorContainer = document.getElementById("error-container");
+
+      searchInput.addEventListener("input", (event) => {
+        const searchString = event.target.value.toLowerCase();
+        comicContainer.innerHTML = ""; // Limpiar contenido previo
+
+        const filteredComics = sortedComics.filter((comic) =>
+          comic.title.toLowerCase().includes(searchString)
+        );
+
+        filteredComics.forEach((comic) => {
+          const comicCard = createComicCard(comic);
+          comicContainer.appendChild(comicCard);
+        });
+        if (filteredComics.length === 0) {
+          errorContainer.classList.remove("hidden");
+        } else {
+          errorContainer.classList.add("hidden");
+        }
+      });
+
+      function createComicCard(comic) {
+        const comicCard = document.createElement("div");
+        comicCard.classList.add("comic-card");
+        comicCard.style.width = "18rem";
+
+        const comicLink = document.createElement("a");
+        comicLink.href = comic.link;
+        comicLink.target = "_blank";
+        comicLink.style.textDecoration = "none";
+        comicLink.style.color = "black";
+
+        const comicImage = document.createElement("img");
+        comicImage.src = comic.image;
+        comicImage.alt = comic.title + " Cover";
+        comicImage.width = 220;
+        comicImage.height = 330;
+        comicImage.style.paddingRight = "5px";
+        comicImage.classList.add("card-img-top");
+
+        const comicTitle = document.createElement("span");
+        comicTitle.textContent = comic.title;
+        comicTitle.style.fontSize = "15px";
+        comicTitle.style.fontWeight = "bold";
+
+        comicLink.appendChild(comicImage);
+        comicLink.appendChild(comicTitle);
+
+        comicCard.appendChild(comicLink);
+
+        return comicCard;
+      }
+    </script>
+    <footer>
+      <div id="goc-ft" data-country="inc-lat" style="display: block">
+        <section id="goc-ft-help">
+          <h2 class="outline"></h2>
+          <div id="goc-ft-logo">
+            <!-- Replace 'your-logo-path' with the actual path to your Marvel logo image -->
+            <img
+              src="../img/Marvel_Logo.svg.png"
+              alt="Marvel Logo"
+              width="150"
+              height="50"
+            />
+          </div>
+          <nav role="navigation" aria-labelledby="about-legal-heading">
+            <h3 id="about-legal-heading" class="outline">About and Legal</h3>
+            <ul id="goc-ft-about">
+              <li>
+                <a
+                  href="https://privacy.thewaltdisneycompany.com/es-es/politica-de-privacidad/"
+                  >Política de Privacidad</a
+                >
+              </li>
+              <li>
+                <a href="https://disneytermsofuse.com/spanish-latin-american/"
+                  >Términos de uso</a
+                >
+              </li>
+              <li>
+                <a href="https://empleos.disneycareers.com/"
+                  >Oportunidades laborales</a
+                >
+              </li>
+              <li>
+                <a
+                  href="http://preferences-mgr.truste.com/?type=disneycolor&amp;affiliateId=115"
+                  >Anuncios basados en intereses</a
+                >
+              </li>
+            </ul>
+            <ul id="goc-ft-legal">
+              <!-- Add any additional legal links if needed -->
+            </ul>
+            <div id="goc-ft-copyright">
+              © Disney © Disney•Pixar © &amp; ™ Lucasfilm LTD © 2023 MARVEL.
+              Reservados todos los derechos,
+              <span class="branding">Disney Entertainment</span>
+            </div>
+          </nav>
+        </section>
+      </div>
+    </footer>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

@@ -1,0 +1,113 @@
+.link {
+  color: black;
+  text-decoration: none;
+}
+
+.link:hover {
+  color: red;
+}
+
+footer,
+div,
+h2,
+nav,
+ul,
+li,
+span {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+}
+
+/* Style for the footer container */
+#goc-ft {
+  background-color: #f8f8f8;
+  padding: 20px;
+  text-align: center;
+}
+
+/* Style for the help section */
+#goc-ft-help {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Style for the Marvel logo */
+#goc-ft-logo img {
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 10px;
+}
+
+/* Style for navigation links */
+#goc-ft-about,
+#goc-ft-legal {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+#goc-ft-about li,
+#goc-ft-legal li {
+  margin-bottom: 5px;
+}
+
+#goc-ft-about a,
+#goc-ft-legal a {
+  text-decoration: none;
+  color: #333; /* Adjust the color as needed */
+  transition: color 0.3s ease;
+}
+
+#goc-ft-about a:hover,
+#goc-ft-legal a:hover {
+  color: #ff0000; /* Change to the desired hover color (red in this case) */
+}
+
+/* Style for the copyright text */
+#goc-ft-copyright {
+  font-size: 14px;
+  color: #555;
+  margin-top: 20px;
+}
+.carousel {
+  --current-slide: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.carousel-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1;
+  padding: 0;
+  margin: 0.5rem;
+  border-radius: 50%;
+  background-color: transparent;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: color 0.1s;
+}
+
+.carousel-button:hover {
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.carousel-button_next {
+  right: 0;
+}
+
+.slides {
+  display: flex;
+  transition: transform 0.5s;
+  transform: translateX(calc(-100% * var(--current-slide)));
+}
+
+.slide {
+  flex: 0 0 100%;
+}
